@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vote System</title>
+
+</head>
+
+
+
+<body>
+<h1>Voting</h1>
+<p>Choose a movie you prefer</p>
+<form action="/action_page.php" method="post">
+<input type="checkbox" name="one" value="tainia1" id="tainia1">Tainia 1
+<progress value="0" max="1000" id="progress1"></progress>
+
+<input type="checkbox" name="two" value="tainia1" id="tainia2" style="left: auto">Tainia 2
+<progress value="0" max="1000" id="progress2"></progress>
+
+<input type="checkbox" name="three" value="tainia1" id="tainia3">Tainia 3
+<progress value="0" max="1000" id="progress3"></progress>
+<div style="display: none" id="divA">
+<input type="checkbox" name="four" value="tainia1"  id="tainia4">Tainia 4
+<progress value="0" max="1000" id="progress4"></progress>
+</div>
+<button type="button" onclick="showMore();">Show More</button>
+<button type="button" onclick="vote();voteDatabase();">Vote</button>
+
+</form>
+<script>
+function showMore(){
+document.getElementById("divA").style.display = "block";
+}
+function vote(){
+if(document.getElementById("tainia1").checked){
+document.getElementById("progress1").value = document.getElementById("progress1").value + 1;
+}else if(document.getElementById("tainia2").checked){
+document.getElementById("progress2").value = document.getElementById("progress2").value + 1;
+}else if(document.getElementById("tainia3").checked){
+document.getElementById("progress3").value = document.getElementById("progress3").value + 1;
+}else if(document.getElementById("tainia4").checked){
+document.getElementById("progress4").value = document.getElementById("progress4").value + 1;
+}
+
+
+}
+
+</script>
+<script>
+<?php
+function voteDatabase(){
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "myDB";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+//Apo edw kai katw ksekinaei o kwdikas to upoloipo einai mono gia na sundetheis stin basi opote an den exeis basi den tha leitourgisei. Den tha to zitisei logika
+
+isset($_POST['one']){
+$sql = "UPDATE Tainies SET value = value + 1 WHERE id=1";  //value einai ena integer to opoio einai sto table Tainies opou to id tou einai 1 upodhlwnei dld to tainia 1
+}
+isset($_POST['two']){
+$sql2 = "UPDATE Tainies SET value = value + 1 WHERE id=2";
+}
+
+isset($_POST['three']){
+$sql3 = "UPDATE Tainies SET value = value + 1 WHERE id=3";
+}
+isset($_POST['four']){
+$sql3 = "UPDATE Tainies SET value = value + 1 WHERE id=4";
+}
+
+mysqli_close($conn);
+}
+?>
+</script>
+
+
+</body>
+
+</html>
